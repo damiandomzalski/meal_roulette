@@ -1,4 +1,6 @@
 # MealRoulette
+![image](https://github.com/damiandomzalski/meal_roulette/assets/20732456/aecf3ff6-14e4-4b09-84a6-641c7a6982b6)
+
 
 MealRoulette is a web application designed to bring spontaneity and excitement to your daily meal planning. Built with Ruby on Rails, this app allows users to generate random meal plans for every day. Integrating with a third-party API, MealRoulette offers a vast selection of recipes from cuisines worldwide, ensuring that you'll always find something new and delicious to try.
 
