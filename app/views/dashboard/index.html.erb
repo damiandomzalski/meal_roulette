@@ -1,0 +1,54 @@
+<div class="container mt-5">
+  <h1 class="mb-4"><%= t('dashboard.title') %></h1>
+
+  <% unless @missing_meal_types.empty? %>
+    <div class="alert alert-info" role="alert">
+      <p><%= t('dashboard.missing_meal_types_info', meal_types: @missing_meal_types.to_sentence) %></p>
+      <%= link_to t('dashboard.random_meal_button'), random_recipes_path, class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+
+  <% if @upcoming_meal_plans.present? %>
+    <div class="card mb-4">
+      <div class="card-header">
+        <%= t('dashboard.your_menu_for_tomorrow') %>
+      </div>
+      <ul class="list-group list-group-flush">
+        <% @upcoming_meal_plans.each do |meal_plan| %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>
+              <%= link_to meal_plan.recipe.name, recipe_path(meal_plan.recipe) %> - <%= meal_plan.meal_type.capitalize %>
+            </span>
+            <%= link_to recipe_path(meal_plan.recipe), data: { turbo_method: :delete, turbo_confirm: t('are_you_sure') }, class: 'btn btn-danger' do %>
+              <%= t('dashboard.remove_button') %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <% if @shopping_list.present? %>
+      <div class="card mt-4">
+        <div class="card-header">
+          <%= t('dashboard.shopping_list_for_meal_plan') %>
+        </div>
+        <table class="table shopping-list-table">
+          <thead>
+            <tr>
+              <th><%= t('dashboard.ingredient_column') %></th>
+              <th><%= t('dashboard.quantities_column') %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @shopping_list.each do |ingredient, quantities| %>
+              <tr>
+                <td><%= ingredient %></td>
+                <td><%= quantities %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,9 @@
+development:
+  base_uri: 'www.themealdb.com/api/json/v1/1'
+  random_endpoint: '/random.php'
+test:
+  base_uri: 'www.themealdb.com/api/json/v1/1'
+  random_endpoint: '/random.php'
+production:
+  base_uri: 'www.themealdb.com/api/json/v1/1'
+  random_endpoint: '/random.php'

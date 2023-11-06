@@ -1,0 +1,49 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <img class="card-img-top" src="<%= @recipe["strMealThumb"] %>" alt="<%= @recipe["strMeal"] %>">
+        <div class="card-body">
+          <h1 class="card-title"><%= @recipe["strMeal"] %></h1>
+          <p class="card-text">
+            <strong><%= t('recipes.preview.category') %>:</strong> <%= @recipe["strCategory"] %><br>
+            <strong><%= t('recipes.preview.cuisine') %>:</strong> <%= @recipe["strArea"] %><br>
+            <strong><%= t('recipes.preview.instructions') %>:</strong> <%= simple_format(@recipe["strInstructions"]) %><br>
+            <strong><%= t('recipes.preview.tags') %>:</strong> <%= @recipe["strTags"] %>
+          </p>
+
+          <h5><%= t('recipes.preview.ingredients') %>:</h5>
+          <ul>
+            <% @ingredients.each do |ingredient| %>
+              <li><%= "#{ingredient[:quantity]} #{ingredient[:name]}" %></li>
+            <% end %>
+          </ul>
+
+          <%= form_with url: add_to_meal_plan_recipes_path, method: :post, local: true do |form| %>
+            <%= form.hidden_field :external_id, value: @recipe["idMeal"], name: 'recipe[external_id]' %>
+            <%= form.hidden_field :name, value: @recipe["strMeal"], name: 'recipe[name]' %>
+            <%= form.hidden_field :instruction, value: @recipe["strInstructions"], name: 'recipe[instruction]' %>
+            <%= form.hidden_field :category, value: @recipe["strCategory"], name: 'recipe[category]' %>
+            <%= form.hidden_field :area, value: @recipe["strArea"], name: 'recipe[area]' %>
+            <%= form.hidden_field :image_url, value: @recipe["strMealThumb"], name: 'recipe[image_url]' %>
+
+            <% @ingredients.each_with_index do |ingredient, index| %>
+              <%= form.fields_for "recipe[ingredients_attributes][#{index}]", ingredient do |ingredients_fields| %>
+                <%= ingredients_fields.hidden_field :name, value: ingredient[:name] %>
+                <%= ingredients_fields.hidden_field :quantity, value: ingredient[:quantity] %>
+              <% end %>
+            <% end %>
+
+            <div class="mb-3">
+              <%= form.label :meal_type, t('recipes.preview.select_meal_type'), class: "form-label" %>
+              <%= form.select :meal_type, @missing_meal_types, {}, { name: 'recipe[meal_type]', class: "form-select" } %>
+            </div>
+            <%= form.submit t('recipes.preview.add_to_meal_plan'), class: "btn btn-primary" %>
+          <% end %>
+
+          <%= button_to t('recipes.preview.reject'), reject_recipes_path, method: :post, class: "btn btn-danger mt-2" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

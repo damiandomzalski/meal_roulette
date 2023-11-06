@@ -1,0 +1,27 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <img class="card-img-top" src="<%= @recipe.image_url %>" alt="<%= @recipe.name %>">
+        <div class="card-body">
+          <h1 class="card-title"><%= @recipe.name %></h1>
+          <p class="card-text">
+            <strong><%= t('recipes.show.category') %>:</strong> <%= @recipe.category %><br>
+            <strong><%= t('recipes.show.cuisine') %>:</strong> <%= @recipe.area %><br>
+            <strong><%= t('recipes.show.instructions') %>:</strong> <%= simple_format(@recipe.instruction) %>
+          </p>
+
+          <h5><%= t('recipes.show.ingredients') %>:</h5>
+          <ul>
+            <% @recipe.recipe_ingredients.includes(:ingredient).each do |recipe_ingredient| %>
+              <li><%= "#{recipe_ingredient.quantity} #{recipe_ingredient.ingredient.name}" %></li>
+            <% end %>
+          </ul>
+
+          <%= link_to t('recipes.show.back_to_dashboard'), root_path, class: 'btn btn-secondary' %> |
+          <%= link_to t('recipes.show.remove_recipe'), recipe_path(@recipe), data: { turbo_method: :delete, turbo_confirm: t('are_you_sure') }, class: 'btn btn-danger' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

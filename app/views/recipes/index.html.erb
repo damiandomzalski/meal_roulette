@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <h1 class="mb-4"><%= t('recipes.my_recipes') %></h1>
+
+  <section aria-label="<%= t('recipes.search_section') %>">
+    <%= search_form_for @q, class: 'search-form mb-4' do |f| %>
+      <div class="form-row">
+        <div class="form-group col-md-8">
+          <%= f.label :name_cont, t('recipes.search_by_name'), class: 'control-label' %>
+          <%= f.search_field :name_cont, class: 'form-control', aria: { label: t('recipes.search_by_name') } %>
+        </div>
+        <div class="form-group col-md-4">
+          <%= f.submit t('recipes.search'), class: 'btn btn-primary mt-md-4' %>
+        </div>
+      </div>
+    <% end %>
+  </section>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th><%= sort_link @q, :name, t('recipes.name') %></th>
+          <th><%= sort_link @q, :category, t('recipes.category') %></th>
+          <th><%= sort_link @q, :area, t('recipes.area') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @recipes.each do |recipe| %>
+          <tr>
+            <td><%= recipe.name %></td>
+            <td><%= recipe.category %></td>
+            <td><%= recipe.area %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <%= will_paginate @recipes, class: 'pagination justify-content-center' %>
+</div>
