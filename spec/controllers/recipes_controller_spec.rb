@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe RecipesController, type: :controller do
   let(:user) { create(:user) }
-  let!(:meal_plans) { create_list(:meal_plan, 4, user: user) }
+  let!(:meal_plans) { create_list(:meal_plan, 4, user:) }
   let(:recipes) { meal_plans.map(&:recipe) }
   let(:recipe) { recipes.first }
 
@@ -53,9 +53,9 @@ RSpec.describe RecipesController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested recipe" do
-      expect {
+      expect do
         delete :destroy, params: { id: recipe.id }
-      }.to change(Recipe, :count).by(-1)
+      end.to change(Recipe, :count).by(-1)
     end
 
     it "redirects to the recipes list" do

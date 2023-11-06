@@ -24,8 +24,8 @@ RSpec.describe MealPlanSetupService, type: :service do
         service = MealPlanSetupService.new(user, recipe_params)
 
         expect { service.call }.to change { Recipe.count }.by(1)
-                                     .and change { Ingredient.count }.by(2)
-                                     .and change { user.meal_plans.count }.by(1)
+                                                          .and change { Ingredient.count }.by(2)
+                                                                                          .and change { user.meal_plans.count }.by(1)
       end
     end
 
@@ -36,8 +36,8 @@ RSpec.describe MealPlanSetupService, type: :service do
         service = MealPlanSetupService.new(user, recipe_params)
 
         expect { service.call }.to raise_error(ActiveRecord::RecordInvalid)
-                                    .and change { Recipe.count }.by(0)
-                                    .and change { user.meal_plans.count }.by(0)
+          .and change { Recipe.count }.by(0)
+                                      .and change { user.meal_plans.count }.by(0)
       end
     end
 
@@ -48,8 +48,8 @@ RSpec.describe MealPlanSetupService, type: :service do
         service = MealPlanSetupService.new(user, recipe_params)
 
         expect { service.call }.to raise_error(ActiveRecord::RecordInvalid)
-                                    .and change { Ingredient.count }.by(0)
-                                    .and change { user.meal_plans.count }.by(0)
+          .and change { Ingredient.count }.by(0)
+                                          .and change { user.meal_plans.count }.by(0)
       end
     end
 
@@ -61,9 +61,8 @@ RSpec.describe MealPlanSetupService, type: :service do
         allow(user.meal_plans).to receive(:count).and_return(0)
 
         expect { service.call }.to raise_error(ActiveRecord::RecordInvalid)
-                                   .and change { user.meal_plans.count }.by(0)
+          .and change { user.meal_plans.count }.by(0)
       end
     end
-
   end
 end

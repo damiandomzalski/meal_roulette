@@ -12,7 +12,7 @@ RSpec.describe RandomRecipeService do
   describe '#call' do
     context 'when there are missing meal types for tomorrow' do
       before do
-        allow(MealPlan).to receive(:missing_meal_types).and_return(['breakfast', 'lunch'])
+        allow(MealPlan).to receive(:missing_meal_types).and_return(%w[breakfast lunch])
       end
 
       it 'returns true when a recipe is found' do

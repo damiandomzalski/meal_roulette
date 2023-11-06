@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe MealPlan, type: :model do
   let(:user) { create(:user) }
-  let(:meal_plan) { build(:meal_plan, user: user) }
+  let(:meal_plan) { build(:meal_plan, user:) }
 
   describe 'validations' do
     it 'is valid with valid attributes' do
@@ -39,8 +39,8 @@ RSpec.describe MealPlan, type: :model do
   describe 'scopes' do
     describe '.upcoming' do
       it 'includes meal plans from today and in the future' do
-        upcoming_meal_plan = create(:meal_plan, date: Date.today, user: user)
-        past_meal_plan = create(:meal_plan, date: Date.yesterday, user: user)
+        upcoming_meal_plan = create(:meal_plan, date: Date.today, user:)
+        past_meal_plan = create(:meal_plan, date: Date.yesterday, user:)
         expect(MealPlan.upcoming).to include(upcoming_meal_plan)
         expect(MealPlan.upcoming).not_to include(past_meal_plan)
       end
@@ -48,7 +48,7 @@ RSpec.describe MealPlan, type: :model do
 
     describe '.missing_meal_types' do
       it 'returns the meal types not yet planned for a given date' do
-        create(:meal_plan, meal_type: 'breakfast', date: Date.tomorrow, user: user)
+        create(:meal_plan, meal_type: 'breakfast', date: Date.tomorrow, user:)
         expect(MealPlan.missing_meal_types(user, Date.tomorrow)).not_to include('breakfast')
       end
     end
@@ -56,8 +56,8 @@ RSpec.describe MealPlan, type: :model do
 
   describe 'uniqueness' do
     it 'does not allow the same meal type for the same user on the same date' do
-      create(:meal_plan, meal_type: 'lunch', date: Date.tomorrow, user: user)
-      duplicate_meal_plan = build(:meal_plan, meal_type: 'lunch', date: Date.tomorrow, user: user)
+      create(:meal_plan, meal_type: 'lunch', date: Date.tomorrow, user:)
+      duplicate_meal_plan = build(:meal_plan, meal_type: 'lunch', date: Date.tomorrow, user:)
       expect(duplicate_meal_plan).not_to be_valid
     end
   end

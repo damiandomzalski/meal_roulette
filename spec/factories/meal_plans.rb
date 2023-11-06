@@ -3,6 +3,6 @@ FactoryBot.define do
     user
     recipe
     date { Date.tomorrow }
-    sequence(:meal_type) { |n| ["breakfast", "lunch", "dinner", "snack"][n % 4] }
+    sequence(:meal_type) { |n| %w[breakfast lunch dinner snack][n % 4] }
   end
 end

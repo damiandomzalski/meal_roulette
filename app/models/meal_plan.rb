@@ -9,7 +9,7 @@ class MealPlan < ApplicationRecord
   validates_uniqueness_of :meal_type, scope: [:user_id, :date]
 
   scope :upcoming, -> { where("date >= ?", Date.today) }
-  scope :missing_meal_types, ->(user, date) {
+  scope :missing_meal_types, lambda { |user, date|
     where(user: user, date: date).pluck(:meal_type).then { |types| MEAL_TYPES - types }
   }
 end

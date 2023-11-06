@@ -3,12 +3,12 @@ require 'rails_helper'
 RSpec.describe DashboardController, type: :controller do
   describe "GET #index" do
     let(:user) { create(:user) }
-    let!(:meal_plans) { create_list(:meal_plan, 3, user: user, date: Date.tomorrow) }
+    let!(:meal_plans) { create_list(:meal_plan, 3, user:, date: Date.tomorrow) }
     let!(:ingredients) { create_list(:ingredient, 3) }
 
     before do
       ingredients.each do |ingredient|
-        create(:recipe_ingredient, recipe: meal_plans.first.recipe, ingredient: ingredient, quantity: "1 teaspoon")
+        create(:recipe_ingredient, recipe: meal_plans.first.recipe, ingredient:, quantity: "1 teaspoon")
       end
       sign_in user
       get :index
