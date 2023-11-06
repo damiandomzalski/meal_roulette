@@ -1,25 +1,34 @@
-# README
+# MealRoulette
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+MealRoulette is a web application designed to bring spontaneity and excitement to your daily meal planning. Built with Ruby on Rails, this app allows users to generate random meal plans for every day. Integrating with a third-party API, MealRoulette offers a vast selection of recipes from cuisines worldwide, ensuring that you'll always find something new and delicious to try.
 
-Things you may want to cover:
+## Features
 
-* Ruby version
+- **User Authentication**: Secure login and registration functionality to keep your meal plans personal.
+- **Random Meal Generation**: Get a random meal plan for any day with a single click.
+- **Personalized Meal Plans**: Customize your meal plans to whatever you want to be your dinner, lunch, etc.
+- **Dynamic Shopping List**: Automatically generate a shopping list based on your upcoming meal plans.
+- **Recipe Management**: All chosen recipes are saved on your account, so you can find them later anytime.
 
-* System dependencies
+## Getting Started
 
-* Configuration
+To get a local copy up and running, follow these simple steps:
 
-* Database creation
+1. Clone the repository:
+   ```
+   git clone https://github.com/your-username/MealRoulette.git
+   ```
+2. Install the required gems:
+   ```
+   bundle install
+   ```
+3. Set up the database:
+   ```
+   rails db:migrate
+   ```
+4. Start the server:
+   ```
+   rails server
+   ```
 
-* Database initialization
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# meal_roulette
