@@ -7,7 +7,7 @@ MealRoulette is a web application designed to bring spontaneity and excitement t
 ## Features
 
 - **User Authentication**: Secure login and registration functionality to keep your meal plans personal.
-- **Random Meal Generation**: Get a random meal plan for any day with a single click.
+- **Random Meal Generation**: Get a random meal plan for upcoming day with a single click.
 - **Personalized Meal Plans**: Customize your meal plans to whatever you want to be your dinner, lunch, etc.
 - **Dynamic Shopping List**: Automatically generate a shopping list based on your upcoming meal plans.
 - **Recipe Management**: All chosen recipes are saved on your account, so you can find them later anytime.
@@ -32,5 +32,14 @@ To get a local copy up and running, follow these simple steps:
    ```
    rails server
    ```
+## Future Plans
 
+*Support for Any Day of the Week*
+Currently, the application supports generating meal plans only for the next day. In the future, I plan to extend this functionality to allow users to generate meal plans for any specified day of the week.
+
+*Integration with Tools like Google Spreadsheet*
+I'm considering integrating with tools like Google Spreadsheet to send personalized shopping lists. This would allow users to easily access and manage their shopping lists from anywhere.
+
+*Ingredient Aggregation Module*
+At present, ingredients are listed in various forms such as 1/4 teaspoon, 20g, 2kg, half a cup, etc. I plan to develop a module for aggregating ingredients, which would standardize these measurements and make the shopping list more user-friendly. I'm still considering the best approach for this feature.
 
