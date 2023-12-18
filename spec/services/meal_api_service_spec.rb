@@ -29,7 +29,7 @@ RSpec.describe MealApiService, type: :service do
       stub_request(:get, "#{MEAL_API_CONFIG['base_uri']}#{MEAL_API_CONFIG['random_endpoint']}")
         .to_return(status: 500, body: nil)
 
-      expect(Rails.logger).to receive(:error).with(/error/i)
+      expect(Rails.logger).to receive(:error).with(/failed/i)
       service = MealApiService.new
       expect(service.random_recipe).to be_nil
     end

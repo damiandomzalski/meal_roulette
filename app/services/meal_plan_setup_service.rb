@@ -26,7 +26,7 @@ class MealPlanSetupService
   end
 
   def create_recipe_ingredients
-    @recipe_params[:ingredients_attributes].each do |_index, ingredient_attributes|
+    @recipe_params[:ingredients_attributes].each do |ingredient_attributes|
       ingredient = Ingredient.find_or_create_by!(name: ingredient_attributes[:name])
       @recipe.recipe_ingredients.create!(ingredient:, quantity: ingredient_attributes[:quantity])
     end

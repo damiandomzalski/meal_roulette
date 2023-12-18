@@ -9,7 +9,7 @@ class MealApiService
     if response.success?
       parse_response(response.body)
     else
-      log_error(I18n.t('recipes.random.error'), response.body)
+      log_error(I18n.t('recipes.random.failure'), response.body)
       nil
     end
   rescue HTTParty::Error, StandardError => e
@@ -18,11 +18,14 @@ class MealApiService
   end
 
   def extract_ingredients(recipe)
-    (1..20).each_with_object([]) do |i, ingredients|
-      ingredient = recipe["strIngredient#{i}"]
-      measure = recipe["strMeasure#{i}"]
-      ingredients.push({ name: ingredient, quantity: measure }) if ingredient.present? && measure.present?
+    ingredients = []
+    recipe.each_key do |key|
+      if key.include?('strIngredient') && recipe[key].present?
+        measure_key = "strMeasure#{key.match(/\d+/)[0]}"
+        ingredients.push({ name: recipe[key], quantity: recipe[measure_key] }) if recipe[measure_key].present?
+      end
     end
+    ingredients
   end
 
   private

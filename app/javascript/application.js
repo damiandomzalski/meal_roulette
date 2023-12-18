@@ -3,6 +3,6 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import { initializeDataTable } from "./modules/dataTableModule"
 
-$(document).ready(() => {
+document.addEventListener("turbo:load", function() {
   initializeDataTable('.shopping-list-table');
 });
